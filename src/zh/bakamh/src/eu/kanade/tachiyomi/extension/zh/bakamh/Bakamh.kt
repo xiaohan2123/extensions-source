@@ -15,7 +15,7 @@ class Bakamh : Madara(
 ) {
     override val mangaDetailsSelectorStatus = ".post-content_item:contains(状态) .summary-content"
 
-    override fun chapterListSelector() = "div.tab-content li:has(a[data-chapter-url])"
+    override fun chapterListSelector() = "div.tab-content li:has(a[storage-chapter-url])"
 
     override fun headersBuilder(): Headers.Builder {
         return super.headersBuilder()
@@ -24,7 +24,7 @@ class Bakamh : Madara(
 
     override fun chapterFromElement(element: Element) = SChapter.create().apply {
         val urlElement = element.selectFirst(chapterUrlSelector)!!
-        url = urlElement.attr("abs:data-chapter-url")
+        url = urlElement.attr("abs:storage-chapter-url")
         name = urlElement.text()
     }
 }
